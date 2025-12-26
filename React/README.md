@@ -5,22 +5,27 @@ For more information about this example check the [Readme](../README.md).
 ## Build and Lint
 
 Install dependencies:
+
 ```sh
 npm install
 ```
 
 Start dev server:
+
 ```sh
 npm run dev
 ```
+
 Open: http://localhost:5173/
 
 Build production bundle:
+
 ```sh
 npm run build
 ```
 
 Run linter:
+
 ```sh
 npm run lint
 ```
