@@ -28,9 +28,7 @@ const editingModes = [
 const editingMode = ref<'row' | 'form' | 'popup'>('row');
 
 function changeEditingMode(e: DxSelectBoxTypes.ValueChangedEvent) {
-  editingMode.value = e.value;
-  const gridInstance = gridRef.value?.instance;
-  gridInstance?.option('editing.mode', e.value);
+  gridRef.value?.instance?.option('editing.mode', e.value);
 }
 
 function onInitNewRow(e: DxDataGridTypes.InitNewRowEvent): void {
