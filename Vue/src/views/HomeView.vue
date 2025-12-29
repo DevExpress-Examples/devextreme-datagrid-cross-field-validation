@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import HomeContent from '../components/HomeContent.vue';
+import DataGridValidation from '../components/DataGridValidation.vue';
 </script>
 
 <template>
-  <HomeContent text="Count"/>
+  <DataGridValidation/>
 </template>
 
