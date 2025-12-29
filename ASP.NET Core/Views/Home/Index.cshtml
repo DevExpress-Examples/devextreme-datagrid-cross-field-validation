@@ -1,29 +1,126 @@
 @using ASP_NET_Core.Models
 
-<h2>Home</h2>
+<div class="demo-container">
+    <div class="options">
+        <div class="caption">Options</div>
 
-@(Html.DevExtreme().DataGrid<SampleOrder>()
-    .ShowBorders(true)
-    .DataSource(d => d.Mvc().Controller("SampleData").LoadAction("Get").Key("OrderID"))
-    .Columns(columns => {
-        columns.AddFor(m => m.OrderID);
-        columns.AddFor(m => m.OrderDate);
-        columns.AddFor(m => m.CustomerName);
-        columns.AddFor(m => m.ShipCountry);
-        columns.AddFor(m => m.ShipCity);
-    })
-    .Paging(p => p.PageSize(10))
-    .FilterRow(f => f.Visible(true))
-    .HeaderFilter(f => f.Visible(true))
-    .GroupPanel(p => p.Visible(true))
-    .Grouping(g => g.AutoExpandAll(false))
-    .RemoteOperations(true)
-    .Summary(s => s
-        .TotalItems(totalItems => {
-            totalItems.AddFor(m => m.ShipCity).SummaryType(SummaryType.Count);
+        <div class="dx-fieldset">
+            <div class="dx-field">
+                <div class="dx-field-label">Editing Mode</div>
+                <div class="dx-field-value">
+                    @(Html.DevExtreme().SelectBox()
+                        .ID("editingModeSelect")
+                        .DataSource(new[] {
+                            new { text = "Row", value = "row" },
+                            new { text = "Form", value = "form" },
+                            new { text = "Popup", value = "popup" }
+                        })
+                        .DisplayExpr("text")
+                        .ValueExpr("value")
+                        .Value("row")
+                        .OnValueChanged("onEditingModeChanged")
+                    )
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @(Html.DevExtreme().DataGrid<EmployeeModel>()
+        .ID("grid")
+        .ShowBorders(true)
+        .DataSource(d => d.Mvc()
+            .Controller("Employees")
+            .LoadAction("Get")
+            .Key("ID")
+        )
+        .Editing(e => e
+            .Mode(GridEditMode.Row)
+            .AllowUpdating(true)
+            .AllowAdding(true)
+        )
+        .Paging(p => p.Enabled(false))
+        .Columns(columns => {
+
+            columns.AddFor(m => m.FirstName);
+            columns.AddFor(m => m.BirthDate)
+                .DataType(GridColumnDataType.Date)
+                .ValidationRules(r => {
+                    r.AddRequired();
+                });
+            columns.AddFor(m => m.HireDate)
+                .DataType(GridColumnDataType.Date)
+                .ValidationRules(r => {
+                    r.AddRequired();
+                    r.AddCustom()
+                        .ValidationCallback("hireDateValidationCallback")
+                        .Message("Hire date cannot be earlier than birth date")
+                        .Reevaluate(true);
+                });
         })
-        .GroupItems(groupItems => {
-            groupItems.Add().SummaryType(SummaryType.Count);
-        })
+        .OnInitNewRow("onInitNewRow")
+        .OnEditorPreparing("onEditorPreparing")
     )
-)
+</div>
+
+
+<script>
+    function onEditingModeChanged(e) {
+        $("#grid").dxDataGrid("instance").option("editing.mode", e.value);
+    }
+
+    function onInitNewRow(e) {
+        e.data.BirthDate = null;
+        e.data.HireDate = null;
+    }
+
+    function onEditorPreparing(e) {
+        const mode = e.component.option("editing.mode");
+        const isGridCellMode = ["batch", "cell", "row"].includes(mode);
+
+        if (e.dataField === 'BirthDate' && e.parentType === 'dataRow') {
+          const defaultHandler = e.editorOptions.onValueChanged;
+
+          e.editorOptions.onValueChanged = (args) => {
+            defaultHandler(args);
+
+            const hireCell = e.component.getCellElement(e.row.rowIndex, 'HireDate');
+            const validator = isGridCellMode ? $(hireCell).dxValidator('instance') : $(hireCell).find('.dx-texteditor').dxValidator('instance');
+            validator.validate();
+          };
+        }
+    }
+
+    function hireDateValidationCallback(params) {
+        return new Date(params.value) > new Date(params.data.BirthDate);
+    }
+</script>
+
+<style>
+.options {
+	padding: 20px;
+	background-color: rgb(191 191 191 / 15%);
+}
+
+.options .dx-fieldset {
+	margin: 0;
+}
+
+.option {
+	margin-top: 10px;
+}
+
+.caption {
+	font-size: 18px;
+	font-weight: 500;
+	padding-right: 15px;
+}
+
+.option > span {
+	margin-right: 10px;
+}
+
+.option > .dx-widget {
+	display: inline-block;
+	vertical-align: middle;
+}
+</style>

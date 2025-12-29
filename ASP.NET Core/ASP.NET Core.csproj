@@ -23,4 +23,8 @@
     <PackageReference Include="DevExtreme.AspNet.Core" Version="25.1.*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>
