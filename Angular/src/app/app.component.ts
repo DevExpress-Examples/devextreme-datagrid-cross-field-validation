@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { DxDataGridComponent, type DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
-import Validator from 'devextreme/ui/validator';
-import type { DxSelectBoxTypes } from 'devextreme-angular/ui/select-box';
-import type { DxDateBoxTypes } from 'devextreme-angular/ui/date-box';
 import type { ValidationCallbackData } from 'devextreme-angular/common';
+import { DxDataGridComponent, type DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
+import type { DxDateBoxTypes } from 'devextreme-angular/ui/date-box';
+import type { DxSelectBoxTypes } from 'devextreme-angular/ui/select-box';
+import Validator from 'devextreme/ui/validator';
 import { EmployeeModel, Service } from './app.service';
 
 @Component({
@@ -50,14 +50,13 @@ export class AppComponent {
       e.editorOptions.onValueChanged = (args: DxDateBoxTypes.ValueChangedEvent): void => {
         defaultHandler(args);
 
-        if (e.row?.rowIndex !== undefined) {
-          const hireCell = e.component.getCellElement(e.row.rowIndex, 'HireDate');
+        if (e.row?.rowIndex === undefined) return;
 
-          if (hireCell) {
-            const validator = isGridCellMode ? (Validator.getInstance(hireCell) as Validator) : (Validator.getInstance(hireCell.querySelector('.dx-texteditor') as Element) as Validator);
+        const hireCell = e.component.getCellElement(e.row.rowIndex, 'HireDate');
+        if (hireCell) {
+          const validator = isGridCellMode ? (Validator.getInstance(hireCell) as Validator) : (Validator.getInstance(hireCell.querySelector('.dx-texteditor') as Element) as Validator);
 
-            validator?.validate();
-          }
+          validator?.validate();
         }
       };
     }
