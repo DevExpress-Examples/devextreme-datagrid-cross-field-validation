@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang='ts'>
 import DxDataGrid, {
   DxColumn,
   DxEditing,
@@ -8,9 +8,8 @@ import DxDataGrid, {
 } from 'devextreme-vue/data-grid';
 import { type DxDateBoxTypes } from 'devextreme-vue/date-box';
 import DxSelectBox, { type DxSelectBoxTypes } from 'devextreme-vue/select-box';
-import type { ValidationCallbackData } from 'devextreme/common';
+import type { ValidationCallbackData } from 'devextreme-vue/common';
 import 'devextreme/dist/css/dx.material.blue.light.compact.css';
-import 'devextreme/ui/validator';
 import Validator from 'devextreme/ui/validator';
 import { ref } from 'vue';
 import { getEmployees, type EmployeeModel } from '../services/data';
@@ -48,18 +47,17 @@ function onEditorPreparing(e: DxDataGridTypes.EditorPreparingEvent): void {
     ): void => {
       defaultHandler(args);
 
-      if (e.row?.rowIndex !== undefined) {
-        const hireCell = e.component.getCellElement(e.row.rowIndex, 'HireDate');
+      if (!e.row?.rowIndex) return;
 
-        if (hireCell) {
-          const validator = isGridCellMode
-            ? (Validator.getInstance(hireCell) as Validator)
-            : (Validator.getInstance(
-                hireCell.querySelector('.dx-texteditor') as Element
-            ) as Validator);
+      const hireCell = e.component.getCellElement(e.row.rowIndex, 'HireDate');
+      if (hireCell) {
+        const validator = isGridCellMode
+          ? (Validator.getInstance(hireCell) as Validator)
+          : (Validator.getInstance(
+              hireCell.querySelector('.dx-texteditor') as Element
+          ) as Validator);
 
-          validator?.validate();
-        }
+        validator?.validate();
       }
     };
   }
