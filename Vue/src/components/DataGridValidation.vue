@@ -1,4 +1,5 @@
 <script setup lang='ts'>
+import type { ValidationCallbackData } from 'devextreme-vue/common';
 import DxDataGrid, {
   DxColumn,
   DxEditing,
@@ -8,7 +9,6 @@ import DxDataGrid, {
 } from 'devextreme-vue/data-grid';
 import { type DxDateBoxTypes } from 'devextreme-vue/date-box';
 import DxSelectBox, { type DxSelectBoxTypes } from 'devextreme-vue/select-box';
-import type { ValidationCallbackData } from 'devextreme-vue/common';
 import 'devextreme/dist/css/dx.material.blue.light.compact.css';
 import Validator from 'devextreme/ui/validator';
 import { ref } from 'vue';
