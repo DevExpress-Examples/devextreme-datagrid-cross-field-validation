@@ -47,7 +47,7 @@ function onEditorPreparing(e: DxDataGridTypes.EditorPreparingEvent): void {
     ): void => {
       defaultHandler(args);
 
-      if (!e.row?.rowIndex) return;
+      if (e.row?.rowIndex === undefined) return;
 
       const hireCell = e.component.getCellElement(e.row.rowIndex, 'HireDate');
       if (hireCell) {
