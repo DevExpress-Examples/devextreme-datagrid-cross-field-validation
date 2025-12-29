@@ -1,8 +1,8 @@
 import type { ValidationCallbackData } from 'devextreme-react/common';
+import type { DataGridTypes } from 'devextreme-react/data-grid';
 import DataGrid, {
   Column, CustomRule, Editing, RequiredRule,
 } from 'devextreme-react/data-grid';
-import type { DataGridTypes } from 'devextreme-react/data-grid';
 import type { DateBoxTypes } from 'devextreme-react/date-box';
 import SelectBox, { type SelectBoxTypes } from 'devextreme-react/select-box';
 import 'devextreme/dist/css/dx.material.blue.light.compact.css';
@@ -30,16 +30,15 @@ function App(): JSX.Element {
       e.editorOptions.onValueChanged = (args: DateBoxTypes.ValueChangedEvent): void => {
         defaultHandler(args);
 
-        if (e.row?.rowIndex !== undefined) {
-          const hireCell = e.component.getCellElement(e.row.rowIndex, 'HireDate');
+        if (e.row?.rowIndex === undefined) return;
 
-          if (hireCell) {
-            const validator = isGridCellMode
-              ? (Validator.getInstance(hireCell) as Validator)
-              : (Validator.getInstance(hireCell.querySelector('.dx-texteditor') as Element) as Validator);
+        const hireCell = e.component.getCellElement(e.row.rowIndex, 'HireDate');
+        if (hireCell) {
+          const validator = isGridCellMode
+            ? (Validator.getInstance(hireCell) as Validator)
+            : (Validator.getInstance(hireCell.querySelector('.dx-texteditor') as Element) as Validator);
 
-            validator?.validate();
-          }
+          validator?.validate();
         }
       };
     }
@@ -55,16 +54,16 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <div className="demo-container">
-      <div className="options">
-        <div className="dx-fieldset">
-          <div className="dx-field">
-            <div className="dx-field-label">Editing Mode</div>
-            <div className="dx-field-value">
+    <div className='demo-container'>
+      <div className='options'>
+        <div className='dx-fieldset'>
+          <div className='dx-field'>
+            <div className='dx-field-label'>Editing Mode</div>
+            <div className='dx-field-value'>
               <SelectBox
                 items={editingModes}
-                displayExpr="text"
-                valueExpr="value"
+                displayExpr='text'
+                valueExpr='value'
                 value={editingMode}
                 onValueChanged={handleModeChange}
               />
@@ -73,19 +72,19 @@ function App(): JSX.Element {
         </div>
       </div>
 
-      <DataGrid dataSource={employees} keyExpr="ID" showBorders={true} onEditorPreparing={onEditorPreparing}>
+      <DataGrid dataSource={employees} keyExpr='ID' showBorders={true} onEditorPreparing={onEditorPreparing}>
         <Editing mode={editingMode} allowUpdating={true} allowAdding={true} allowDeleting={true} />
 
-        <Column dataField="FirstName" />
+        <Column dataField='FirstName' />
 
-        <Column dataField="BirthDate" dataType="date">
+        <Column dataField='BirthDate' dataType='date'>
           <RequiredRule />
         </Column>
 
-        <Column dataField="HireDate" dataType="date">
+        <Column dataField='HireDate' dataType='date'>
           <RequiredRule />
           <CustomRule
-            message="Hire date cannot be earlier than birth date"
+            message='Hire date cannot be earlier than birth date'
             reevaluate={true}
             validationCallback={hireDateValidationCallback}
           />
