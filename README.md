@@ -32,9 +32,9 @@ Use onEditorPreparing to override the first editor's onValueChanged event handle
 
 ## Documentation
 
-- [DataGrid.onEditorPreparing] (https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/Configuration/#onEditorPreparing)
-- [Validator.getInstance(element)] (https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxValidator/Methods/#getInstanceelement)
-- [Validator.validate()] (https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxValidator/Methods/#validate)
+- [DataGrid.onEditorPreparing](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/Configuration/#onEditorPreparing)
+- [Validator.getInstance(element)](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxValidator/Methods/#getInstanceelement)
+- [Validator.validate()](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxValidator/Methods/#validate)
 
 <!-- feedback -->
 ## Does this example address your development requirements/objectives?
