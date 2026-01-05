@@ -11,11 +11,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace ASP_NET_Core.Controllers;
 
 [Route("api/[controller]")]
-public class SampleDataController: Controller {
+public class EmployeesController: Controller {
 
     [HttpGet]
     public object Get(DataSourceLoadOptions loadOptions) {
-        return DataSourceLoader.Load(SampleData.Orders, loadOptions);
+        return DataSourceLoader.Load(SampleData.Employees, loadOptions);
     }
 
 }
