@@ -4,11 +4,15 @@
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 [![](https://img.shields.io/badge/💬_Leave_Feedback-feecdd?style=flat-square)](#does-this-example-address-your-development-requirementsobjectives)
 <!-- default badges end -->
-# DevExtreme DataGrid - How to validate a column editor based on the changes of another editor
+# DevExtreme DataGrid - Validate a Cell Editor Based on Changes in Another Editor
 
-This example demonstrates how to get an editor's validator instance to call its validate method when another editor's value changes. 
+This example gets a cell editor's [Validator](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxValidator/) instance to call [validate()](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxValidator/Methods/#validate) when another editor's value changes. 
 
 ![DevExtreme DataGrid - How to validate a column editor based on the changes of another editor](images/datagrid-cross-field-validation.gif)
+
+## Implementation Details
+
+Use [onEditorPreparing](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/Configuration/#onEditorPreparing) to override a cell editor's `onValueChanged` handler in data rows. Call the initial handler to preserve the editor's default functionality. Use the [getCellElement()](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/Methods/#getCellElementrowIndex_dataField) method to get another editor's parent element, then call [Validator.instance()](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxValidator/Methods/#instance) and `validate()`.
 
 ## Files to Review
 
@@ -25,10 +29,6 @@ This example demonstrates how to get an editor's validator instance to call its 
     - [index.js](jQuery/src/index.js)
 - **ASP.NET Core**    
     - [Index.cshtml](ASP.NET%20Core/Views/Home/Index.cshtml)
-
-## Implementation Details
-
-Use onEditorPreparing to override the first editor's onValueChanged event handler in data rows. Call the default handler to preserve built-in behavior, then locate the second editor in the same row and retrieve its dxValidator based on the current editing mode. Call the validate method to force revalidation of the second editor.
 
 ## Documentation
 
