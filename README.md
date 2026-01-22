@@ -14,7 +14,7 @@ This example obtains the [Validator](https://js.devexpress.com/Documentation/Api
 
 Use [onEditorPreparing](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/Configuration/#onEditorPreparing) to override a data row editor's `onValueChanged` handler as follows:
 
-1. Call the initial handler to preserve the editor default functionality.
+1. Call the initial handler to preserve the default editor functionality.
 2. Use the [getCellElement()](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/Methods/#getCellElementrowIndex_dataField) method to obtain the parent element of another editor.
 3. To obtain the Validator instance attached to this editor, use the element returned by `getCellElement()` as follows:
     - **jQuery and ASP.NET Core**: Wrap the element in a jQuery object and Call [Validator.instance()](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxValidator/Methods/#instance).
