@@ -4,18 +4,18 @@
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 [![](https://img.shields.io/badge/💬_Leave_Feedback-feecdd?style=flat-square)](#does-this-example-address-your-development-requirementsobjectives)
 <!-- default badges end -->
-# DevExtreme DataGrid - Validate an Editor Based on Changes in Another Editor
+# DevExtreme DataGrid - Validate Editor Value based on Changes Made to a Different Editor
 
-This example obtains the [Validator](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxValidator/) instance attached to a data row editor to call [validate()](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxValidator/Methods/#validate) when another editor changes value. 
+This example obtains a [Validator](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxValidator/) instance (attached to a data row editor) and calls [validate()](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxValidator/Methods/#validate)  when a different editor changes its value. 
 
-![DevExtreme DataGrid - Validate an Editor Based on Changes in Another Editor](images/datagrid-cross-field-validation.gif)
+![DevExtreme DataGrid - Validate Editor Value based on Changes Made to a Different Editor](images/datagrid-cross-field-validation.gif)
 
 ## Implementation Details
 
-Use [onEditorPreparing](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/Configuration/#onEditorPreparing) to override a data row editor's `onValueChanged` handler as follows:
+Use [onEditorPreparing](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/Configuration/#onEditorPreparing) to override a data row editor's `onValueChanged` handler:
 
-1. Call the initial handler to preserve the default editor functionality.
-2. Use the [getCellElement()](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/Methods/#getCellElementrowIndex_dataField) method to obtain the parent element of another editor.
+1. Call the initial handler to preserve default editor functionality.
+2. Use the [getCellElement()](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/Methods/#getCellElementrowIndex_dataField) method to obtain the parent element of the other editor.
 3. To obtain the Validator instance attached to this editor, use the element returned by `getCellElement()` as follows:
     - **jQuery and ASP.NET Core**: Wrap the element in a jQuery object and call [Validator.instance()](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxValidator/Methods/#instance).
     - **Angular, Vue, and React**: Pass the element to [Validator.getInstance()](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxValidator/Methods/#getInstanceelement) as a parameter.
