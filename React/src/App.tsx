@@ -9,7 +9,7 @@ import 'devextreme/dist/css/dx.material.blue.light.compact.css';
 import Validator from 'devextreme/ui/validator';
 import { useCallback, useState } from 'react';
 import './App.css';
-import employees from './data';
+import employees from './data.tsx';
 
 const editingModes = [
   { text: 'Row', value: 'row' },
