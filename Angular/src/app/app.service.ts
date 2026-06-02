@@ -34,7 +34,7 @@ const employeesData: EmployeeModel[] = [
   },
 ];
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class Service {
   getEmployees(): EmployeeModel[] {
     return employeesData;

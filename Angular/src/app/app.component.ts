@@ -1,13 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
 import type { ValidationCallbackData } from 'devextreme-angular/common';
-import { DxDataGridComponent, type DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
+import { DxDataGridComponent, DxDataGridModule, type DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
 import type { DxDateBoxTypes } from 'devextreme-angular/ui/date-box';
+import { DxSelectBoxModule } from 'devextreme-angular/ui/select-box';
 import type { DxSelectBoxTypes } from 'devextreme-angular/ui/select-box';
 import Validator from 'devextreme/ui/validator';
 import { EmployeeModel, Service } from './app.service';
 
 @Component({
   selector: 'app-root',
+  imports: [DxDataGridModule, DxSelectBoxModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
