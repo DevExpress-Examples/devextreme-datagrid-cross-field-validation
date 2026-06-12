@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import type { ValidationCallbackData } from 'devextreme-angular/common';
 import { DxDataGridComponent, DxDataGridModule, type DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
 import type { DxDateBoxTypes } from 'devextreme-angular/ui/date-box';
@@ -11,6 +11,7 @@ import { EmployeeModel, Service } from './app.service';
   selector: 'app-root',
   imports: [DxDataGridModule, DxSelectBoxModule],
   templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
